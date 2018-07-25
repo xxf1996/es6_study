@@ -1,7 +1,7 @@
 /*
 let 和 const 命令
 */
-test4(2);
+test6();
 
 /**
  * let与var变量提升的差异
@@ -173,4 +173,31 @@ function test4(idx){
     };
 
     fn[idx]();
+}
+
+/**
+ * let不能在同一作用域内重复声明同一个变量！（const也一样）
+ * 而var可以
+ */
+function test5(){
+    var b = 1;
+    var b = 'xiu';
+    console.log(b);
+    let a = 1;
+    let a = 'zuosi';
+}
+
+/**
+ * let在块级作用域内声明变量时，变量会绑定到该层作用域；
+ * 然后不受其他作用域的影响；
+ * 即使外层（父级）作用域存在变量名相同的变量，在这层作用域内相当于没有该变量名的变量；
+ * 所以未遇到let声明之前，该变量无法被访问！
+ */
+function test6(){
+    let a = 123;
+    console.log(a);
+    { // 暂时性死区（temporal dead zone）
+        a = 'zuosi';
+        let a;
+    }
 }
